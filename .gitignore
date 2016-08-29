@@ -1,2 +1,8 @@
 #Mac Stuff
 .DS_Store
+
+#Node Stuff
+node_modules
+
+#Config Stuff
+config.json

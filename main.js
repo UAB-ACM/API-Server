@@ -12,7 +12,7 @@ var bodyParser = require('body-parser');                                        
 var app = express();
     app.use(bodyParser.urlencoded({ extended: true }));                         //Configuring middleware
     app.post('/membership/signup.js', require('./routes/membership/signup.js'));//Route for ACM Membership signup
-
+    app.post('/contact.js', require('./routes/contact/contact.js'));    //Route for Content form
 
 //Starting HTTP Server
 app.listen(config.portNum, function () {                                        //Tell Express to listen on config port
