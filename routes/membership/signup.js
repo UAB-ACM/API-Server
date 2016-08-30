@@ -1,7 +1,9 @@
 //Switching to Strict JS
 'use strict';                                                                   //Converts mistakes to errors
 
-var stripe     = require('stripe')('sk_test_hi3BnIVjjC9efZfbVwlnmSrH');         //Stripe Payment Library
+var config = require('../../config.json').stripe;                               //Config
+
+var stripe     = require('stripe')(config.key);                                 //Stripe Payment Library
 
 //Exporting route
 module.exports = function (req, res) {                                          //Export the function that is used to handle the web request

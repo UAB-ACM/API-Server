@@ -1,3 +1,6 @@
 {
-  "portNum": 8001
+  "portNum": 8001,
+  "stripe":{
+    "key":"pk_live_Lj6LDBqXdjQSSTkxafNMkadbad"
+  }
 }
