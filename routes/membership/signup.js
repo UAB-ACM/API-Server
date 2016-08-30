@@ -5,9 +5,9 @@ var stripe     = require('stripe')('sk_test_hi3BnIVjjC9efZfbVwlnmSrH');         
 
 //Exporting route
 module.exports = function (req, res) {                                          //Export the function that is used to handle the web request
+  console.log(req.body.name);
   console.log(req.body.blazerid);
   console.log(req.body.email);
-  console.log(req.body.phone);
   console.log(req.body.token);
 
   stripe.charges.create({                                                       //Create a stripe charge
