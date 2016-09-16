@@ -1,6 +1,12 @@
 {
   "portNum": 8001,
   "stripe":{
-    "key":"pk_live_Lj6LDBqXdjQSSTkxafNMkadbad"
+    "key":"sk_live_X9s5ryEhUZyOYbgHZzdAlVlk"
+  },
+  "email":{
+    "username":"",
+    "domain":"",
+    "password": "",
+    "smtpServer": ""
   }
 }

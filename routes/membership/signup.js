@@ -4,6 +4,11 @@
 var config = require('../../config.json').stripe;                               //Config
 
 var stripe     = require('stripe')(config.key);                                 //Stripe Payment Library
+var nodemailer = require('nodemailer');                                         //Mailer Library
+
+var transportString = `smtps://${config.email.username}%40${config.email.domain}:${config.email.password}@${config.email.smtpServer}`
+var transporter = nodemailer.createTransport(transportString);                  //Open SMTP Connection
+
 
 //Exporting route
 module.exports = function (req, res) {                                          //Export the function that is used to handle the web request
@@ -27,5 +32,20 @@ module.exports = function (req, res) {                                          
       'charge': charge                                                          //Debug Charge Object
     };
     res.send(JSON.stringify(data));                                             //Send data object back to client with code (200)
+
+    var mailOptions = {                                                         //Mail Config
+        from: '"ACM Server" <uabacm@gmail.com>',                                  // sender address
+        to: 'acm@cis.uab.edu',                                                    // list of receivers
+        subject: 'New Membership!',                                               // Subject line
+        text: `Name: ${req.body.name} \n BlazerID: ${req.body.blazerid} \n Email: ${req.body.email}`,
+    };
+
+    transporter.sendMail(mailOptions, function(error, info){                    //Send the mail
+        if(error){
+            return console.log(error);
+        }
+        console.log('Message sent: ' + info.response);
+    });
+
   });
 };
