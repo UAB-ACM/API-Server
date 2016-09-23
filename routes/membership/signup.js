@@ -1,9 +1,9 @@
 //Switching to Strict JS
 'use strict';                                                                   //Converts mistakes to errors
 
-var config = require('../../config.json').stripe;                               //Config
+var config = require('../../config.json');                               //Config
 
-var stripe     = require('stripe')(config.key);                                 //Stripe Payment Library
+var stripe     = require('stripe')(config.stripe.key);                                 //Stripe Payment Library
 var nodemailer = require('nodemailer');                                         //Mailer Library
 
 var transportString = `smtps://${config.email.username}%40${config.email.domain}:${config.email.password}@${config.email.smtpServer}`
