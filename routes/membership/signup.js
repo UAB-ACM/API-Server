@@ -53,7 +53,7 @@ module.exports = function (req, res) {                                          
 
     db.query(query, function(err, rows, fields) {                                 //Registering User with Database
       if (err) throw err;
-      console.log('Registered ${req.body.blazerid} with database');
+      console.log(`Registered ${req.body.blazerid} with database`);
     });
 
     var mailOptions = {                                                           //Mail Config
