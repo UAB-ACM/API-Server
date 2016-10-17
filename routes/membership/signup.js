@@ -7,11 +7,16 @@ var config = require('../../config.json');
 /* Libraries */
 var stripe     = require('stripe')(config.stripe.key);                          //Stripe Payment Library
 var nodemailer = require('nodemailer');                                         //Mailer Library
+var mysql      = require('mysql');                                              //MySQL Library
 
 /* Mail Sender Setup */
 var transportString = `smtps://${config.email.username}%40${config.email.domain}:${config.email.password}@${config.email.smtpServer}`
 var transporter = nodemailer.createTransport(transportString);                  //Open SMTP Connection
 
+
+/* MySQL Connection Setup */
+var db = mysql.createConnection(config.database);
+    db.connect();
 
 /* Exporting route */
 module.exports = function (req, res) {                                          //Export the function that is used to handle the web request
@@ -34,6 +39,22 @@ module.exports = function (req, res) {                                          
     }
 
     res.send('Signup Success!');                                                  //Sending success back to client
+
+    var today = new Date();
+    var membershipStart = today.getUTCFullYear()+'-'+(today.getUTCMonth() + 1)+'-'+today.getUTCDate();
+    var membershipEnd = (today.getUTCFullYear() + 1)+'-'+(today.getUTCMonth() + 1)+'-'+today.getUTCDate();
+
+    var query = `INSERT INTO membership
+                       SET name = '${req.body.name}',
+                           blazer_id = '${req.body.blazerid}',
+                           email = '${req.body.email}',
+                           membership_start = '${membershipStart}',
+                           membership_end = '${membershipEnd}';`;
+
+    db.query(query, function(err, rows, fields) {                                 //Registering User with Database
+      if (err) throw err;
+      console.log('Registered ${req.body.blazerid} with database');
+    });
 
     var mailOptions = {                                                           //Mail Config
         from: '"ACM Server" <uabacm@gmail.com>',                                    //Sender Address
