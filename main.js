@@ -13,7 +13,7 @@ var app = express();                                                            
     app.use(bodyParser.urlencoded({ extended: true }));                           //Configuring middleware
     app.post('/contact.js', require('./routes/contact/contact.js'));              //Route for Content form
     app.post('/membership/signup.js', require('./routes/membership/signup.js'));  //Route for ACM Membership signup
-    app.get('/getMembership.js', require('./routes/membership/getMembership.js'));//Route for getting membership status
+    app.get('/membership/:blazerid', require('./routes/membership/getMembership.js'));//Route for getting membership status
 
 /* Starting HTTP Server */
 app.listen(config.portNum, function () {                                        //Tell Express to listen on config port

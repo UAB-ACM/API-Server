@@ -13,11 +13,11 @@ var db = mysql.createConnection(config.database);
 
 /* Exporting route */
 module.exports = function (req, res) {                                          //Export the function that is used to handle the web request
-  console.log(`Lookup membership for ${req.body.blazerid}`);                      //Logging out to server
+  console.log(`Lookup membership for ${req.params.blazerid}`);                      //Logging out to server
 
   var query = `SELECT *
                  FROM membership
-                WHERE blazer_id = '${req.body.blazerid}';`;
+                WHERE blazer_id = '${req.params.blazerid}';`;
 
   db.query(query, function(err, rows, fields) {                                 //Registering User with Database
     if (err){
